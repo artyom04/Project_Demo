@@ -1,0 +1,2 @@
+Full Name,Username,Email,Password,Birthday,PassportId,TaxPayerId,Salary,Experience
+Artyom Tonoyan,artyomtonoyan,tonoyan.artyom.04@gmail.com,99a880c9b63a5a2c83b7b75cc7f596ff,04/11/1998,AP0488825,AD859652,180000.0,2.0
