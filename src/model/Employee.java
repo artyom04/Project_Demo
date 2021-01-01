@@ -1,7 +1,6 @@
 package model;
 
 import model.exceptions.InvalidInputException;
-import model.exceptions.InvalidValueException;
 import model.interfaces.Bonus;
 import model.interfaces.TaxPaying;
 
@@ -9,7 +8,7 @@ import java.text.DecimalFormat;
 
 
 public class Employee extends Person implements Bonus, TaxPaying {
-    protected static final DecimalFormat df2 = new DecimalFormat("#.##");
+    protected static final DecimalFormat DECIMAL_FORMAT_2 = new DecimalFormat("#.##");
     public static final double MINIMAL_SALARY = 68000;
     private String taxPayerID;
     private double salary;
@@ -45,12 +44,12 @@ public class Employee extends Person implements Bonus, TaxPaying {
         return salary;
     }
 
-    public void setSalary(double salary) throws InvalidValueException {
+    public void setSalary(double salary) throws InvalidInputException {
         if (salary >= MINIMAL_SALARY) {
             this.salary = salary;
         } else {
             String message = "Salary must be greater or equal to " + MINIMAL_SALARY;
-            throw new InvalidValueException(message, salary);
+            throw new InvalidInputException(message, salary);
         }
     }
 
@@ -58,11 +57,11 @@ public class Employee extends Person implements Bonus, TaxPaying {
         return experience;
     }
 
-    public void setExperience(double experience) throws InvalidValueException {
+    public void setExperience(double experience) throws InvalidInputException {
         if (experience >= 0 && experience <= 50) {
             this.experience = experience;
         } else {
-            throw new InvalidValueException("Experience must be in interval [0,50] ", experience);
+            throw new InvalidInputException("Experience must be in interval [0,50] ", experience);
         }
     }
 
@@ -85,7 +84,7 @@ public class Employee extends Person implements Bonus, TaxPaying {
     @Override
     public double calculateBonus() {
         if (this.isEligibleForBonus()) {
-            return Double.parseDouble(df2.format(this.getSalary() * 0.3));
+            return Double.parseDouble(DECIMAL_FORMAT_2.format(this.getSalary() * 0.3));
         } else {
             return 0;
         }

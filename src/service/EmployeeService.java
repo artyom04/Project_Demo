@@ -3,7 +3,6 @@ package service;
 import model.Employee;
 import model.FinancialReport;
 import model.exceptions.InvalidInputException;
-import model.exceptions.InvalidValueException;
 
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
@@ -24,7 +23,7 @@ public class EmployeeService {
                 indicator = false;
             } catch (InvalidInputException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
@@ -36,7 +35,7 @@ public class EmployeeService {
                 indicator = false;
             } catch (InvalidInputException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
@@ -63,31 +62,32 @@ public class EmployeeService {
                 indicator = false;
             } catch (Exception e) {
                 System.out.println("Please try again");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
         while (indicator) {
-            System.out.print("Enter the Passport ID: ");
+            System.out.print("Enter the Passport ID (Ex. AP1234567): ");
             String id = scanner.next();
             try {
                 employee.setIdentificationNumber(id.trim());
                 indicator = false;
             } catch (Exception e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
         while (indicator) {
-            System.out.print("Enter the Tax Payer ID: ");
+            System.out.print("Enter the Tax Payer ID (Ex. AA123456): ");
             String id = scanner.next();
             try {
                 employee.setTaxPayerID(id.trim());
                 indicator = false;
             } catch (InvalidInputException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
+
             }
         }
         indicator = true;
@@ -97,9 +97,9 @@ public class EmployeeService {
             try {
                 employee.setSalary(salary);
                 indicator = false;
-            } catch (InvalidValueException e) {
+            } catch (InvalidInputException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
@@ -109,9 +109,9 @@ public class EmployeeService {
             try {
                 employee.setExperience(experience);
                 indicator = false;
-            } catch (InvalidValueException e) {
+            } catch (InvalidInputException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         return employee;

@@ -12,10 +12,6 @@ public abstract class Person {
     protected LocalDate birthday;
     protected String identificationNumber;
 
-    public Person() {
-
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -58,7 +54,6 @@ public abstract class Person {
                             identificationNumber);
                 }
             }
-            FileService.write("src/files/passport_id_database.txt", "\n" + identificationNumber);
             this.identificationNumber = identificationNumber;
         }
     }
@@ -69,8 +64,19 @@ public abstract class Person {
         } else if (!Character.isUpperCase(name.charAt(0))) {
             throw new InvalidInputException("Should start by Uppercase Letter!", name);
         } else if (name.length() > 25 || name.length() < 2) {
-            throw new InvalidInputException("Should have length at least 2, at most 25", name);
+            throw new InvalidInputException("Should have length at least 2 characters, at most 25 characters", name);
+        } else if (!containOnlyLetters(name)) {
+            throw new InvalidInputException("Should contain only letters", name);
         }
+    }
+
+    private boolean containOnlyLetters(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isLetter(text.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

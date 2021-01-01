@@ -33,7 +33,7 @@ public class LecturerService {
                 indicator = false;
             } catch (InvalidInputException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         return lecturer;
@@ -45,9 +45,10 @@ public class LecturerService {
         try {
             FileService.write("src/files/lecturer.txt", data);
             System.out.println("Information was successfully written to lecturer.txt file!");
+            FileService.write("src/files/passport_id_database.txt", "\n" + lecturer.getIdentificationNumber());
         } catch (IOException e) {
             System.out.println("File Not Found / Can't Write");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -72,7 +73,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -102,7 +103,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
 
     }
@@ -129,7 +130,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -154,7 +155,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -183,7 +184,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -203,7 +204,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -225,7 +226,7 @@ public class LecturerService {
             }
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
@@ -234,7 +235,7 @@ public class LecturerService {
             EmployeeService.printFinancialReport(getLecturersSetFromFile());
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 }

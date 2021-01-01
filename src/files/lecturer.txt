@@ -2,3 +2,4 @@ Full Name,Birthday,Passport ID,Tax Payer ID,Salary,Experience,Academic Degree,Ta
 Armen Petrosyan,03/05/1995,AE7458963,AQ256341,185000.0,3.0,Masters,Calculus 3
 Artak Karapetyan,30/12/1975,AW7412583,AR256341,250000.0,3.0,Doctoral,Linear Algebra
 Arsen Arsenyan,25/10/1992,AK8596321,AQ258741,96000.0,0.5,Associate,Geometry
+Armine Karapetyan,03/02/1985,AE8596321,EW854712,96000.0,4.0,Doctoral,Analysis

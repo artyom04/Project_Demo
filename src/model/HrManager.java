@@ -2,11 +2,12 @@ package model;
 
 import model.exceptions.InvalidInputException;
 import service.EncryptionService;
-import service.FileService;
+import service.HrManagerService;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,14 +42,12 @@ public class HrManager extends Employee {
     }
 
     public void setUsername(String username) throws Exception {
-        String[] userInformation = FileService.read("src/files/user_database.txt");
+        ArrayList<HrManager> hrManagers = HrManagerService.getHrManagersFromFile();
         if (username.length() <= 10) {
-            throw new InvalidInputException("Username should have at least 11 digits!", username);
+            throw new InvalidInputException("Username should have at least 11 characters!", username);
         }
-        for (int i = 1, userInformationLength = userInformation.length; i < userInformationLength; i++) {
-            String information = userInformation[i];
-            String[] splitInfo = information.split(",");
-            if (splitInfo[1].equals(username)) {
+        for (HrManager hrManager : hrManagers) {
+            if (hrManager.getUsername().equals(username)) {
                 throw new InvalidInputException("Username has been already taken, please use another!", username);
             }
         }
@@ -59,14 +58,19 @@ public class HrManager extends Employee {
         return email;
     }
 
-    public void setEmail(String email) throws InvalidInputException {
+    public void setEmail(String email) throws Exception {
+        ArrayList<HrManager> hrManagers = HrManagerService.getHrManagersFromFile();
         Pattern emailPattern = Pattern.compile(EMAIL_VERIFICATION);
         Matcher matcher = emailPattern.matcher(email);
-        if (matcher.matches()) {
-            this.email = email;
-        } else {
+        if (!matcher.matches()) {
             throw new InvalidInputException("Email should be like: something@example.com", email);
         }
+        for (HrManager hrManager : hrManagers) {
+            if (hrManager.getEmail().equals(email)) {
+                throw new InvalidInputException("Email has been already registered!", email);
+            }
+        }
+        this.email = email;
     }
 
     public String getPassword() {
@@ -78,7 +82,7 @@ public class HrManager extends Employee {
             this.password = EncryptionService.getMd5(password);
         } else {
             throw new InvalidInputException("Password should contain at least 2 uppercase letters and 3 " +
-                    "numbers and has min 8 digit length", password);
+                    "numbers and has min 8 character length", password);
         }
     }
 

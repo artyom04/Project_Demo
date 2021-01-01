@@ -1,7 +1,7 @@
 package model.exceptions;
 
 public class InvalidInputException extends Exception {
-    public InvalidInputException(String message, String input) {
+    public <T> InvalidInputException(String message, T input) {
         super(message + ", Your input: " + input);
     }
 }

@@ -77,7 +77,7 @@ public class Lecturer extends Employee {
     @Override
     public double calculateBonus() {
         if (academicDegree.getNumberOfDegree() == 4) {
-            return Double.parseDouble(df2.format(this.getSalary() * 0.4));
+            return Double.parseDouble(DECIMAL_FORMAT_2.format(this.getSalary() * 0.4));
         } else {
             return super.calculateBonus();
         }

@@ -22,7 +22,7 @@ public class HrManagerService {
                 indicator = false;
             } catch (Exception e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
@@ -32,9 +32,9 @@ public class HrManagerService {
             try {
                 hrManager.setEmail(email.trim());
                 indicator = false;
-            } catch (InvalidInputException e) {
+            } catch (Exception e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         indicator = true;
@@ -46,7 +46,7 @@ public class HrManagerService {
                 indicator = false;
             } catch (InvalidInputException | NoSuchAlgorithmException e) {
                 System.out.println("Please try again!");
-                e.printStackTrace();
+                System.out.println(e.toString());
             }
         }
         return hrManager;
@@ -56,14 +56,15 @@ public class HrManagerService {
         HrManager hrManager = createHrManager();
         try {
             FileService.write("src/files/user_database.txt", "\n" + hrManager);
+            FileService.write("src/files/passport_id_database.txt", "\n" + hrManager.getIdentificationNumber());
             System.out.println("Information was successfully written to user_database.txt file!");
         } catch (IOException e) {
             System.out.println("File Not Found / Can't Write");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 
-    private static ArrayList<HrManager> getHrManagersFromFile() throws Exception {
+    public static ArrayList<HrManager> getHrManagersFromFile() throws Exception {
         ArrayList<HrManager> hrManagersArrayList = new ArrayList<>();
         String[] userInformation = FileService.read("src/files/user_database.txt");
         for (int i = 1; i < userInformation.length; i++) {
@@ -95,7 +96,7 @@ public class HrManagerService {
             return false;
         } catch (Exception e) {
             System.out.println("Invalid File/ Can't Read");
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
         return false;
     }
