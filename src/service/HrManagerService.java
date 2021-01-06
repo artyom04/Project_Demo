@@ -3,14 +3,10 @@ package service;
 import model.HrManager;
 import model.exceptions.InvalidInputException;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class HrManagerService {
-    private static final Scanner scanner = new Scanner(System.in);
-
+public class HrManagerService extends EmployeeService {
     private static HrManager createHrManager() {
         HrManager hrManager = new HrManager(EmployeeService.createEmployee());
         boolean indicator = true;
@@ -53,15 +49,7 @@ public class HrManagerService {
     }
 
     public static void register() {
-        HrManager hrManager = createHrManager();
-        try {
-            FileService.write("src/files/user_database.txt", "\n" + hrManager);
-            FileService.write("src/files/passport_id_database.txt", "\n" + hrManager.getIdentificationNumber());
-            System.out.println("Information was successfully written to user_database.txt file!");
-        } catch (IOException e) {
-            System.out.println("File Not Found / Can't Write");
-            System.out.println(e.toString());
-        }
+        createEmployeeAndSave(createHrManager(), "src/files/user_database.txt");
     }
 
     public static ArrayList<HrManager> getHrManagersFromFile() throws Exception {

@@ -3,9 +3,6 @@ package model;
 import model.enums.AcademicDegree;
 import model.exceptions.InvalidInputException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Lecturer extends Employee {
     private AcademicDegree academicDegree;
     private String taughtCourse;
@@ -15,15 +12,8 @@ public class Lecturer extends Employee {
     }
 
     public Lecturer(String data) throws Exception {
+        super(data);
         String[] splitData = data.split(",");
-        setFirstName(splitData[0].split(" ")[0]);
-        setLastName(splitData[0].split(" ")[1]);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        setBirthday(LocalDate.parse(splitData[1], formatter));
-        this.identificationNumber = splitData[2];
-        setTaxPayerID(splitData[3]);
-        setSalary(Double.parseDouble(splitData[4]));
-        setExperience(Double.parseDouble(splitData[5]));
         setAcademicDegree(splitData[6].toUpperCase());
         setTaughtCourse(splitData[7]);
     }
@@ -36,22 +26,22 @@ public class Lecturer extends Employee {
         return academicDegree;
     }
 
-    public boolean setAcademicDegree(int choice) {
+    public boolean setAcademicDegreeByValue(String choice) {
         boolean indicator;
         switch (choice) {
-            case 1:
+            case "1":
                 academicDegree = AcademicDegree.ASSOCIATE;
                 indicator = true;
                 break;
-            case 2:
+            case "2":
                 academicDegree = AcademicDegree.BACHELORS;
                 indicator = true;
                 break;
-            case 3:
+            case "3":
                 academicDegree = AcademicDegree.MASTERS;
                 indicator = true;
                 break;
-            case 4:
+            case "4":
                 academicDegree = AcademicDegree.DOCTORAL;
                 indicator = true;
                 break;
@@ -75,6 +65,12 @@ public class Lecturer extends Employee {
     }
 
     @Override
+    public void printEmployee() {
+        super.printEmployee();
+        System.out.println(", Academic Degree: " + this.getAcademicDegree() + ", Taught Course: " + this.getTaughtCourse());
+    }
+
+    @Override
     public double calculateBonus() {
         if (academicDegree.getNumberOfDegree() == 4) {
             return Double.parseDouble(DECIMAL_FORMAT_2.format(this.getSalary() * 0.4));
@@ -85,9 +81,6 @@ public class Lecturer extends Employee {
 
     @Override
     public String toString() {
-        String formattedDate = this.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        return this.getFirstName() + " " + this.getLastName() + "," + formattedDate + "," +
-                this.getIdentificationNumber() + "," + this.getTaxPayerID() + "," + this.getSalary() + "," +
-                this.getExperience() + "," + this.getAcademicDegree() + "," + this.getTaughtCourse();
+        return super.toString() + "," + this.getAcademicDegree() + "," + this.getTaughtCourse();
     }
 }

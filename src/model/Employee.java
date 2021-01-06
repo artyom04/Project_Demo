@@ -5,6 +5,8 @@ import model.interfaces.Bonus;
 import model.interfaces.TaxPaying;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class Employee extends Person implements Bonus, TaxPaying {
@@ -16,6 +18,18 @@ public class Employee extends Person implements Bonus, TaxPaying {
 
     public Employee() {
 
+    }
+
+    public Employee(String data) throws InvalidInputException {
+        String[] splitData = data.split(",");
+        setFirstName(splitData[0].split(" ")[0]);
+        setLastName(splitData[0].split(" ")[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        setBirthday(LocalDate.parse(splitData[1], formatter));
+        this.identificationNumber = splitData[2];
+        setTaxPayerID(splitData[3]);
+        setSalary(Double.parseDouble(splitData[4]));
+        setExperience(Double.parseDouble(splitData[5]));
     }
 
     public Employee(Employee employee) {
@@ -65,6 +79,13 @@ public class Employee extends Person implements Bonus, TaxPaying {
         }
     }
 
+    public void printEmployee() {
+        System.out.print("Full Name: " + this.getFirstName() + " " + this.getLastName() +
+                ", Birthday: " + this.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                ", Passport ID: " + this.getIdentificationNumber() + ", Tax-Payer ID: " + this.getTaxPayerID() +
+                ", Salary: " + this.getSalary() + ", Experience: " + this.getExperience());
+    }
+
     @Override
     public double calculateTaxAmount() {
         if (this.getSalary() == MINIMAL_SALARY) {
@@ -88,5 +109,13 @@ public class Employee extends Person implements Bonus, TaxPaying {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public String toString() {
+        String formattedDate = this.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return this.getFirstName() + " " + this.getLastName() + "," + formattedDate + "," +
+                this.getIdentificationNumber() + "," + this.getTaxPayerID() + "," + this.getSalary() + "," +
+                this.getExperience();
     }
 }

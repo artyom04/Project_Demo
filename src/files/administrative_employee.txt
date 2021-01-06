@@ -1,0 +1,6 @@
+Full Name,Birthday,Passport ID,Tax Payer ID,Salary,Experience,Role
+Arsen Abgaryan,03/05/1983,AP7415263,DE857425,96500.0,1.5,Operator
+Artak Sargsyan,06/06/1994,AQ8596321,QW857463,250000.0,5.0,Manager
+Karen Petrosyan,31/12/1993,AW8596321,AW254187,145000.0,2.0,Assistant
+Lusine Petrosyan,03/02/1974,AP5832654,AD857412,96000.0,1.0,Assistant
+Armine Araqelyan,28/02/1963,AD2574136,AT582146,198000.0,2.0,Assistant

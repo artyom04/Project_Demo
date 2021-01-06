@@ -5,8 +5,6 @@ import service.EncryptionService;
 import service.HrManagerService;
 
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,18 +17,11 @@ public class HrManager extends Employee {
 
 
     public HrManager(String data) throws Exception {
+        super(data);
         String[] splitData = data.split(",");
-        setFirstName(splitData[0].split(" ")[0]);
-        setLastName(splitData[0].split(" ")[1]);
-        this.username = splitData[1];
-        this.email = splitData[2];
-        this.password = splitData[3];
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        setBirthday(LocalDate.parse(splitData[4], formatter));
-        this.identificationNumber = splitData[5];
-        setTaxPayerID(splitData[6]);
-        setSalary(Double.parseDouble(splitData[7]));
-        setExperience(Double.parseDouble(splitData[8]));
+        this.username = splitData[6];
+        this.email = splitData[7];
+        this.password = splitData[8];
     }
 
     public HrManager(Employee employee) {
@@ -108,9 +99,7 @@ public class HrManager extends Employee {
 
     @Override
     public String toString() {
-        String formattedDate = this.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        return this.getFirstName() + " " + this.getLastName() + "," + this.getUsername() + "," + this.getEmail() + "," +
-                this.getPassword() + "," + formattedDate + "," + this.getIdentificationNumber() + "," +
-                this.getTaxPayerID() + "," + this.getSalary() + "," + this.getExperience();
+        return super.toString() + "," + this.getUsername() + "," + this.getEmail() + "," +
+                this.getPassword();
     }
 }
