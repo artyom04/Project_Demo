@@ -10,9 +10,23 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * {@code EmployeeService} class;
+ * Contains functions which manipulate with {@code Employee} class objects
+ *
+ * @author Artyom
+ */
 public class EmployeeService {
+    /**
+     * Scanner object
+     */
     protected static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Creates {@code Employee} instance
+     *
+     * @return {@code Employee} object
+     */
     public static Employee createEmployee() {
         Employee employee = new Employee();
         boolean indicator = true;
@@ -41,7 +55,7 @@ public class EmployeeService {
         }
         indicator = true;
         while (indicator) {
-            int yearOfBirth = 0;
+            int yearOfBirth;
             while (true) {
                 try {
                     System.out.print("Enter the year of birth: (value in [1920, 2002]): ");
@@ -59,7 +73,7 @@ public class EmployeeService {
                     scanner.next();
                 }
             }
-            int monthOfBirth = 0;
+            int monthOfBirth;
             while (true) {
                 try {
                     System.out.print("Enter the month of birth: (value in [1,12]): ");
@@ -71,7 +85,7 @@ public class EmployeeService {
                     scanner.next();
                 }
             }
-            int dayOfBirth = 0;
+            int dayOfBirth;
             while (true) {
                 try {
                     System.out.print("Enter the day of birth: (value in [1,31]): ");
@@ -152,6 +166,14 @@ public class EmployeeService {
         return employee;
     }
 
+    /**
+     * Creates LinkedHashMap, whose keys are Strings of {@code Employee}'s Passport IDs and values are
+     * {@code FinancialReport}s
+     *
+     * @param employees LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>       type of LinkedHashSet items, extends {@code Employee}
+     * @return LinkedHashMap(String, FinancialReport)
+     */
     private static <T extends Employee> LinkedHashMap<String, FinancialReport>
     makeFinancialReportMap(LinkedHashSet<T> employees) {
         LinkedHashMap<String, FinancialReport> myFinancialReport = new LinkedHashMap<>();
@@ -163,17 +185,34 @@ public class EmployeeService {
         return myFinancialReport;
     }
 
+    /**
+     * Prints keys and values of given LinkedHashMap
+     *
+     * @param myMap LinkedHashMap with {@code String} keys and {@code FinancialReport} values
+     */
     private static void printMap(LinkedHashMap<String, FinancialReport> myMap) {
         for (String key : myMap.keySet()) {
             System.out.println(myMap.get(key));
         }
     }
 
+    /**
+     * Prints Financial Report of {@code Employee}s or its subclasses
+     *
+     * @param employees LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>       type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Employee> void printFinancialReport(LinkedHashSet<T> employees) {
         System.out.println("Full Name, Passport ID, Salary, Bonus Amount, Tax Amount");
         printMap(makeFinancialReportMap(employees));
     }
 
+    /**
+     * Creates {@code Employee} and Saves to file by the given path
+     *
+     * @param employee {@code Employee} object reference
+     * @param path     parameter with the value of {@code String}
+     */
     public static void createEmployeeAndSave(Employee employee, String path) {
         String data = "\n" + employee;
         try {
@@ -189,6 +228,12 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Prints the given LinkedHashSet of {@code Employee}s or its subclasses
+     *
+     * @param employeeLinkedHashSet LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>                   type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Employee> void printEmployees(LinkedHashSet<T> employeeLinkedHashSet) {
         if (employeeLinkedHashSet.isEmpty()) {
             System.out.println("Empty!");
@@ -199,6 +244,12 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Finds {@code Employee}s or its subclasses by Passport ID and Prints
+     *
+     * @param employeeLinkedHashSet LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>                   type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Employee> void
     findEmployeeByPassportIdAndPrint(LinkedHashSet<T> employeeLinkedHashSet) {
         System.out.print("Enter the Passport ID: ");
@@ -216,10 +267,16 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Finds {@code Employee}s or its subclasses by Salary Greater Than given value and Prints
+     *
+     * @param employeeLinkedHashSet LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>                   type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Employee> void
     findEmployeeBySalaryGreaterThan(LinkedHashSet<T> employeeLinkedHashSet) {
-        double salary = 0;
-        while(true) {
+        double salary;
+        while (true) {
             try {
                 System.out.print("Enter the Amount: ");
                 salary = scanner.nextDouble();
@@ -246,6 +303,12 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Finds {@code Employee}s or its subclasses by Full Name and Prints
+     *
+     * @param employeeLinkedHashSet LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>                   type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Employee> void findEmployeeByNameAndPrint(LinkedHashSet<T> employeeLinkedHashSet) {
         System.out.print("Enter the first name: ");
         String firstName = scanner.next();
@@ -269,6 +332,14 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Sorts {@code Employee}s or its subclasses by given Comparator
+     *
+     * @param comparator            parameter {@code Comparator}
+     * @param employeeLinkedHashSet LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>                   type of {@code Comparator}
+     * @param <E>                   type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Comparator<Employee>, E extends Employee>
     void sortEmployeeBy(T comparator, LinkedHashSet<E> employeeLinkedHashSet) {
         List<E> employeeList = new ArrayList<>(employeeLinkedHashSet);
@@ -282,6 +353,12 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Prints {@code Employee}s or its subclasses Bonus and Tax Amount Information
+     *
+     * @param employeeLinkedHashSet LinkedHashSet of {@code Employee}s or its subclasses
+     * @param <T>                   type of LinkedHashSet items, extends {@code Employee}
+     */
     public static <T extends Employee> void printEmployeeBonusAndTax(LinkedHashSet<T> employeeLinkedHashSet) {
         System.out.print("Enter the Passport ID: ");
         String passportId = scanner.next();
@@ -298,6 +375,10 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * @param employee {@code Employee} or its subclass object reference
+     * @param <T>      extends {@code Employee}
+     */
     private static <T extends Employee> void printEmployeeBonusAndTaxAmount(T employee) {
         if (employee == null) {
             System.out.println("No Information!");

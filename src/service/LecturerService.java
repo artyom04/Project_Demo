@@ -7,8 +7,19 @@ import model.exceptions.InvalidInputException;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 
+/**
+ * {@code LecturerService} class which extends {@code EmployeeService} class;
+ * Contains functions which manipulate with {@code Lecturer} class objects
+ *
+ * @author Artyom
+ */
 public class LecturerService extends EmployeeService {
 
+    /**
+     * Creates {@code Lecturer} instance
+     *
+     * @return {@code Lecturer} object
+     */
     private static Lecturer createLecturer() {
         Lecturer lecturer = new Lecturer(EmployeeService.createEmployee());
         boolean indicator = true;
@@ -37,10 +48,18 @@ public class LecturerService extends EmployeeService {
         return lecturer;
     }
 
+    /**
+     * Creates {@code Lecturer} instance and saves to file
+     */
     public static void createLecturerAndSave() {
         createEmployeeAndSave(createLecturer(), "src/files/lecturer.txt");
     }
 
+    /**
+     * Reads from file and creates LinkedHashSet of {@code Lecturer}s
+     *
+     * @return LinkedHashSet of {@code Lecturer}s
+     */
     public static LinkedHashSet<Lecturer> getLecturersSetFromFile() {
         LinkedHashSet<Lecturer> lecturerLinkedHashSet = new LinkedHashSet<>();
         try {
@@ -55,14 +74,23 @@ public class LecturerService extends EmployeeService {
         return lecturerLinkedHashSet;
     }
 
+    /**
+     * Prints all {@code Lecturer}s
+     */
     public static void printAllLecturers() {
         printEmployees(getLecturersSetFromFile());
     }
 
+    /**
+     * Finds {@code Lecturer} by Passport ID and Prints
+     */
     public static void findLecturerByPassportIdAndPrint() {
         findEmployeeByPassportIdAndPrint(getLecturersSetFromFile());
     }
 
+    /**
+     * Finds {@code Lecturer} by Taught Course Name and Prints
+     */
     public static void findLecturersByCourseAndPrint() {
         System.out.print("Enter the course: ");
         scanner.useDelimiter("\n");
@@ -89,23 +117,40 @@ public class LecturerService extends EmployeeService {
         }
     }
 
+    /**
+     * Finds {@code Lecturer} by Salary Greater Than Given Value and Prints
+     */
     public static void findLecturersBySalaryGreaterThan() {
         findEmployeeBySalaryGreaterThan(getLecturersSetFromFile());
     }
 
+    /**
+     * Finds {@code Lecturer} by Full Name and Prints
+     */
     public static void findLecturersByNameAndPrint() {
         findEmployeeByNameAndPrint(getLecturersSetFromFile());
     }
 
+    /**
+     * Sorts {@code Lecturer}s by given Comparator
+     *
+     * @param comparator parameter {@code Comparator}
+     * @param <T>        type of {@code Comparator}
+     */
     public static <T extends Comparator<Employee>> void sortLecturersBy(T comparator) {
         sortEmployeeBy(comparator, getLecturersSetFromFile());
     }
 
+    /**
+     * Prints {@code Lecturer}'s Bonus and Tax Amount Information
+     */
     public static void printLecturerBonusAndTax() {
         printEmployeeBonusAndTax(getLecturersSetFromFile());
-
     }
 
+    /**
+     * Prints {@code Lecturer}s Financial Report
+     */
     public static void printLecturersFinancialReport() {
         printFinancialReport(getLecturersSetFromFile());
     }

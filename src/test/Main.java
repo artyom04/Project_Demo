@@ -44,6 +44,9 @@ public class Main {
         }
     }
 
+    /**
+     * Main Inner Menu
+     */
     private static void openInnerMenu() {
         boolean isMenuActive = true;
         while (isMenuActive) {
@@ -87,6 +90,9 @@ public class Main {
         }
     }
 
+    /**
+     * Inner Menu for Creating Employees
+     */
     private static void createInnerChoice() {
         System.out.println("1. Create Lecturer 2. Create Administrative Employee 3. Go To Menu");
         System.out.print("Your input: ");
@@ -107,6 +113,9 @@ public class Main {
         }
     }
 
+    /**
+     * Inner Menu for Printing Employees
+     */
     private static void printInnerChoice() {
         System.out.println("1. Print Lecturers 2. Print Administrative Employees 3. Print Both 4. Go To Menu");
         System.out.print("Your input: ");
@@ -131,6 +140,9 @@ public class Main {
         }
     }
 
+    /**
+     * Inner Menu for Searching Employees
+     */
     private static void searchInnerChoice() {
         System.out.println("1. Search Lecturers 2. Search Administrative Employees 3. Go To Menu");
         System.out.print("Your input: ");
@@ -194,6 +206,9 @@ public class Main {
         }
     }
 
+    /**
+     * Inner Menu for Sorting Employees
+     */
     private static void sortInnerChoice() {
         System.out.println("1. Sort Lecturers 2. Sort Administrative Employees 3. Go To Menu");
         System.out.print("Your input: ");
@@ -387,6 +402,9 @@ public class Main {
         }
     }
 
+    /**
+     * Inner Menu for Employees Bonus and Tax Amount
+     */
     private static void bonusAndTaxInnerChoice() {
         System.out.println("1. For Lecturers 2. For Administrative Employee 3. Go To Menu");
         System.out.print("Your input: ");
@@ -409,6 +427,9 @@ public class Main {
         }
     }
 
+    /**
+     * Inner Menu for Employees Financial Report
+     */
     private static void financialReportInnerChoice() {
         System.out.println("1. For Lecturers 2. For Administrative Employee 3. Go To Menu");
         System.out.print("Your input: ");

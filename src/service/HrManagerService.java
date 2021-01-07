@@ -6,7 +6,19 @@ import model.exceptions.InvalidInputException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
+/**
+ * {@code HrManagerService} class which extends {@code EmployeeService} class
+ * Contains functions which manipulate with {@code HrManager} class objects
+ *
+ * @author Artyom
+ */
 public class HrManagerService extends EmployeeService {
+
+    /**
+     * Creates {@code HrManager} instance
+     *
+     * @return {@code HrManager} object
+     */
     private static HrManager createHrManager() {
         HrManager hrManager = new HrManager(EmployeeService.createEmployee());
         boolean indicator = true;
@@ -48,10 +60,19 @@ public class HrManagerService extends EmployeeService {
         return hrManager;
     }
 
+    /**
+     * Register new {@code HrManager}
+     */
     public static void register() {
         createEmployeeAndSave(createHrManager(), "src/files/user_database.txt");
     }
 
+    /**
+     * Reads from file and creates LinkedHashSet of {@code HrManager}s
+     *
+     * @return LinkedHashSet of {@code HrManager}s
+     * @throws Exception if can't read from file
+     */
     public static ArrayList<HrManager> getHrManagersFromFile() throws Exception {
         ArrayList<HrManager> hrManagersArrayList = new ArrayList<>();
         String[] userInformation = FileService.read("src/files/user_database.txt");
@@ -61,6 +82,11 @@ public class HrManagerService extends EmployeeService {
         return hrManagersArrayList;
     }
 
+    /**
+     * Login {@code HrManager}
+     *
+     * @return {@code true} if login successful, {@code false} otherwise
+     */
     public static boolean login() {
         try {
             ArrayList<HrManager> userArrayList = getHrManagersFromFile();
